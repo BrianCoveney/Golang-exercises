@@ -5,3 +5,4 @@ go get github.com/nats-io/nats
 go get github.com/nats-io/go-nats
 go get github.com/nats-io/nuid
 go get github.com/BrianCoveney/nats2/transport
+go get github.com/BrianCoveney/nats2/stringutil

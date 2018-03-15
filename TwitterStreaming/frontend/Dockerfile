@@ -1,9 +1,9 @@
 FROM golang:1.9
 
+MAINTAINER brian.coveney
+
 WORKDIR /go
 COPY . .
-
-RUN echo "[url \"git@github.com:\"]\n\tinsteadOf = https://github.com/" >> /root/.gitconfig
 
 RUN bash get.sh
 

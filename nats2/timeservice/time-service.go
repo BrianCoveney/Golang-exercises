@@ -16,6 +16,7 @@ var nc *nats.Conn
 
 func main() {
 
+
     uri := os.Getenv("NATS_URI")
 
     var err error

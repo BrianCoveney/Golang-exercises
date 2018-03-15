@@ -10,6 +10,7 @@ import (
     "os"
     "sync"
     "github.com/BrianCoveney/nats2/transport"
+
 )
 
 var nc *nats.Conn
@@ -17,7 +18,9 @@ var nc *nats.Conn
 func main() {
     uri := os.Getenv("NATS_URI")
 
-    var err error
+
+
+	var err error
 
     nc, err = nats.Connect(uri)
     if err != nil {
