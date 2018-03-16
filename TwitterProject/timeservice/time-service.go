@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/BrianCoveney/nats2/transport"
+	"github.com/BrianCoveney/TwitterProject/transport"
 )
 
 // We use globals because it's a small application demonstrating NATS.

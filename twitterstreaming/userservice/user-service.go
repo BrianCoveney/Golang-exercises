@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dlarkinc/nats2/transport"
 	"github.com/golang/protobuf/proto"
 	"github.com/nats-io/nats"
+	"github.com/BrianCoveney/twitterstreaming/transport"
 )
 
 var twitterUsers map[string]string

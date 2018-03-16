@@ -1,12 +1,9 @@
-FROM golang:1.9
+FROM golang:1.9.3
 
 WORKDIR /go
 COPY . .
 
-RUN echo "[url \"git@github.com:\"]\n\tinsteadOf = https://github.com/" >> /root/.gitconfig
-
-RUN bash get.sh
-
+RUN go get -d -v ./...
 RUN go build frontend.go
 
 EXPOSE 3000

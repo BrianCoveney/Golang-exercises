@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dlarkinc/nats2/transport"
+	"github.com/BrianCoveney/TwitterProject/transport"
 	"github.com/golang/protobuf/proto"
 	"github.com/nats-io/nats"
 )

@@ -1,13 +1,12 @@
 package main
 
 import (
-	"os"
 	"fmt"
-	"github.com/nats-io/go-nats"
+	"github.com/dlarkinc/nats2/transport"
 	"github.com/golang/protobuf/proto"
-	"github.com/BrianCoveney/nats2/transport"
+	"github.com/nats-io/go-nats"
+	"os"
 )
-
 
 // We use globals because it's a small application demonstrating NATS.
 var users map[string]string

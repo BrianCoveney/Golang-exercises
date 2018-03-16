@@ -9,7 +9,8 @@ import (
 	"os"
 	"sync"
 	"time"
-	"github.com/BrianCoveney/nats2/transport"
+
+	"github.com/BrianCoveney/TwitterProject/transport"
 )
 
 var nc *nats.Conn

@@ -9,7 +9,6 @@ import (
 	"os"
 	"sync"
 	"time"
-	"github.com/BrianCoveney/nats2/transport"
 )
 
 var nc *nats.Conn
@@ -27,16 +26,12 @@ func main() {
 	fmt.Println("Connected to NATS server " + uri)
 
 	m := mux.NewRouter()
-	m.HandleFunc("/{id}", handleTwitterUser)
+	m.HandleFunc("/{id}", handleUserWithTime)
 
-	port := ":3001"
-
-	http.ListenAndServe(port, m)
-	fmt.Println("Connected to NATS server on port " + port)
-
+	http.ListenAndServe(":3000", m)
 }
 
-func handleTwitterUser(w http.ResponseWriter, r *http.Request) {
+func handleUserWithTime(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	myUser := Transport.User{Id: vars["id"]}
 	wg := sync.WaitGroup{}
@@ -47,13 +42,13 @@ func handleTwitterUser(w http.ResponseWriter, r *http.Request) {
 		if err != nil || len(myUser.Id) == 0 {
 			fmt.Println(err)
 			w.WriteHeader(500)
-			fmt.Println("Problem with parsing the user Id .")
+			fmt.Println("Problem with parsing the user Id.")
 			return
 		}
 
 		msg, err := nc.Request("UserNameById", data, 100*time.Millisecond)
 		if err == nil && msg != nil {
-			myUserWithName := Transport.User{}
+			myUserWithName := Transport.Tweet{}
 			err := proto.Unmarshal(msg.Data, &myUserWithName)
 			if err == nil {
 				myUser = myUserWithName
@@ -64,6 +59,5 @@ func handleTwitterUser(w http.ResponseWriter, r *http.Request) {
 
 	wg.Wait()
 
-	fmt.Fprintln(w, "Hello", myUser.Name, " with id ", myUser.Id, ".")
-
+	fmt.Fprintln(w, "Hello ", myUser.Name, " with id ", myUser.Id, ", the time is ")
 }

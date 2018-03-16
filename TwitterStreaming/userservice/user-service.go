@@ -1,15 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"os"
-
-	"github.com/dlarkinc/nats2/transport"
-	"github.com/golang/protobuf/proto"
+	"fmt"
 	"github.com/nats-io/nats"
+	"github.com/golang/protobuf/proto"
+
+	"github.com/BrianCoveney/TwitterStreaming/transport"
 )
 
-var twitterUsers map[string]string
+var users map[string]string
 var nc *nats.Conn
 
 func main() {
@@ -26,11 +26,11 @@ func main() {
 
 	fmt.Println("Connected to NATS server " + uri)
 
-	twitterUsers = make(map[string]string)
-	twitterUsers["1"] = "Bob"
-	twitterUsers["2"] = "John"
-	twitterUsers["3"] = "Dan"
-	twitterUsers["4"] = "Kate"
+	users = make(map[string]string)
+	users["1"] = "Bob"
+	users["2"] = "John"
+	users["3"] = "Dan"
+	users["4"] = "Kate"
 
 	nc.QueueSubscribe("UserNameById", "userNameByIdProviders", replyWithUserId)
 	select {}
@@ -45,7 +45,7 @@ func replyWithUserId(m *nats.Msg) {
 		return
 	}
 
-	myUser.Name = twitterUsers[myUser.Id]
+	myUser.Name = users[myUser.Id]
 	data, err := proto.Marshal(&myUser)
 	if err != nil {
 		fmt.Println(err)
